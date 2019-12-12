@@ -1,105 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="sweetalert2.all.min.js" />
-    <title>Document</title>
-  </head>
-  <body>
-    <button onclick="story()">試試看</button>
-    <script>
-      function story() {
-        swal
-          .fire({
-            title: "你的名字",
-            text: "請問你叫甚麼名字?",
-            input: "text",
-            inputValue: "小明",
-            showCancelButton: true,
-            closeOnConfirm: false
-          })
-          .then(result => {
-            if (result.value) {
-              name = result.value;
-              swal
-                .fire({
-                  title: "你叫" + name + "阿，這名字不錯喔!",
-                  text: "既然名字都有了，就趕緊開始吧",
-                  confirmButtonText: "繼續"
-                })
-                .then(start);
-            }
-            if (result.dismiss === "cancel") {
-              name = "明明";
-              swal
-                .fire({
-                  title: "沒有名字!",
-                  text: "那你就叫" + name + "吧",
-                  confirmButtonText: "繼續"
-                })
-                .then(start);
-            }
-          });
-      }
-      function start() {
-        swal
-          .fire({
-            title: "你好", //標題
-            text: "這是第一次進入", //內文
-            showCancelButton: true, //開啟 cancel 按鈕
-            confirmButtonText: "好的", //設定 ok 按紐文字
-            confirmButtonColor: "#56a9d8", //設定 ok 按鈕顏色
-            cancelButtonText: "取消", //設定 cancel 按鈕文字
-            cancelButtonColor: "#ed5436" //設定 cancel 按鈕顏色
-          })
-          .then(result => {
-            if (result.value) {
-              swal
-                .fire("歡迎你", "慢慢理解如何使用sweetalert", "success")
-                .then(function() {
-                  swal
-                    .fire({
-                      title: "第二層",
-                      text: "這邊是第二層",
-                      showCancelButton: true,
-                      confirmButtonText: "好的",
-                      confirmButtonColor: "#56a9d8",
-                      cancelButtonText: "取消",
-                      cancelButtonColor: "#ed5436"
-                    })
-                    .then(result => {
-                      if (result.value) {
-                        swal
-                          .fire("快要中午了", "準備去吃飯了", "success")
-                          .then(result => {
-                            if (result.value) {
-                              swal.fire(
-                                "快要下課了",
-                                "趕快收拾東西，準備閃人",
-                                "success"
-                              );
-                            } else if (result.dismiss === "cancel") {
-                              swal.fire(
-                                "課還沒上完",
-                                "借我五分鐘把課上完在下課喔",
-                                "error"
-                              );
-                            }
-                          });
-                      } else if (result.dismiss === "cancel") {
-                        swal.fire("下午了", "起床吧，不要再睡了", "error");
-                      }
-                    });
-                });
-            } else if (result.dismiss === "cancel") {
-              swal.fire("可惜", "重頭來多吧", "warning");
-            }
-          });
-      }
-    </script>
 
-    <script src="sweetalert2.all.min.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="sweetalert2.all.min.js" />
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="story()">試試看</button>
+  <script>
+
+
+
+    function story() {
+      swal.fire({
+        title: "取個名字吧!",
+        input: "text",
+        inputValue: "小明",
+        showCancelButton: true,
+        closeOnConfirm: false
+      }).then(result => {
+        if (result.value) {
+          name = result.value;
+          swal.fire({
+            title: "你叫" + name + "阿，這名字不錯喔!",
+            text: "既然名字都有了，就趕緊開始吧",
+            confirmButtonText: "繼續"
+          }).then(start);
+        }
+        if (result.dismiss === "cancel") {
+          name = "阿明";
+          swal.fire({
+            title: "沒有名字!",
+            text: "那你就叫" + name + "吧",
+            confirmButtonText: "繼續"
+          }).then(start);
+        }
+      });
+    }
+    function start() {
+      swal.fire({
+        title: "第一關", //標題
+        text: `冬至吃湯圓，元宵節吃元宵，大家常常將兩者搞混，其實他們製法不同，是不一樣的東西哦! 
+        請問元宵是如何製成的呢 `, //內文
+        showCancelButton: true, //開啟 cancel 按鈕
+        confirmButtonText: "用搖的", //設定 ok 按紐文字
+        confirmButtonColor: "#56a9d8", //設定 ok 按鈕顏色
+        cancelButtonText: "用搓的", //設定 cancel 按鈕文字
+        cancelButtonColor: "#ed5436", //設定 cancel 按鈕顏色
+        imageUrl: 'https://picsum.photos/400/200/?random=1',
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: 'Custom image'
+      }).then(result => {
+        if (result.value) {
+          swal.fire(
+            "答對了!",
+            "第一題只是牛刀小試而已，趕緊接的下一題!",
+            "success"
+          ).then(function () {
+            swal.fire({
+              title: "第二題",
+              text: `台北市的市花為生命力堅強的杜鵑花，市鳥為保育類動物台灣藍鵲
+              那麼台北市的市樹市什麼呢?`,
+              showCancelButton: true,
+              confirmButtonText: "榕樹",
+              confirmButtonColor: "#56a9d8",
+              cancelButtonText: "樟樹",
+              cancelButtonColor: "#ed5436"
+            }).then(result => {
+              if (result.value) {
+                swal.fire(
+                  "答對了",
+                  "看來是個了解台北市的孩子呢",
+                  "success"
+                ).then(function () {
+                  swal.fire({
+                    title: '第三題',
+                    text: `古巴前革領導人斐代爾·卡斯楚執政時，致力於追求社會平，進行多項改革，奠定古巴現代社會基礎，古巴國內到處都可以看見斐代爾·卡斯楚的痕跡，但這身中卻操遇過多次暗殺
+                    請問斐代爾·卡斯楚操到暗殺的次數為多少?`,
+                    showCancelButton: true,
+                    confirmButtonText: '638次',
+                    confirmButtonColor: "#56a9d8",
+                    cancelButtonText: "683次",
+                    cancelButtonColor: "#ed5436"
+                  }).then(result => {
+                    if (result.value) {
+                      swal.fire(
+                        '答對了',
+                        '沒想到你連這個都知道!',
+                        'success'
+                      ).then(function () {
+                        swal.fire({
+                          title: '第四題',
+                          text: `矗立塞納河畔的巴黎聖母院正式名稱為「聖母主教堂」(Notre Dame Cathedral)，是天主教巴黎總教區的主教堂，見證過許多歷史事件
+                          請問歷史上，哪位`,
+                          showCancelButton: true,
+                          confirmButtonText: '拿破崙一世',
+                          confirmButtonColor: "#56a9d8",
+                          cancelButtonText: "路易十四",
+                          cancelButtonColor: "#ed5436"
+                        }).then(result => {
+                          if (result.value) {
+                            swal.fire(
+                              '答對囉',
+                              '巴黎聖母院是法國最具代表性的文化遺產之一，前一陣子的大火，真的讓人痛徹心扉!',
+                              'success'
+                            ).then(function () {
+                              swal.fire({
+                                title: '第五題',
+                                text: `古埃及法老所帶的的紅白雙冠，象徵著法老在整個埃及的權力，而王冠上還裝飾著兩種動物標誌，其中之一為眼鏡蛇，則另一標誌為何?`,
+                                showCancelButton: true,
+                                confirmButtonText: '禿鷲',
+                                confirmButtonColor: "#56a9d8",
+                                cancelButtonText: "聖䴉",
+                                cancelButtonColor: "#ed5436"
+                              }).then(result => {
+                                if (result.value) {
+                                  swal.fire(
+                                    '答對了',
+                                    '看來甚麼題目都難不倒你呢',
+                                    'success'
+                                  ).then(function () {
+                                    swal.fire({
+                                      title: '全數通關',
+                                      text: '好厲害!全部都答對了呢!',
+                                      confirmButtonText: '離開',
+                                      confirmButtonColor: "#56a9d8",
+                                    })
+                                  })
+                                } else if (result.dismiss === 'cancel') {
+                                  swal.fire(
+                                    '好可惜!答錯了',
+                                    '紅白雙冠上的兩種動物標誌，一隻為埃及眼鏡蛇，象徵著下埃及的守護女神瓦傑特，一隻埃及禿鷲，象徵著上埃及的守護女神奈赫貝特',
+                                    'error'
+                                  )
+                                }
+                              })
+                            })
+                          }
+                          else if (result.dismiss === 'cancel') {
+                            swal.fire(
+                              '答錯囉!',
+                              '1804年12月2日拿破崙在巴黎聖母院隆重舉行的國王加冕儀式，而法國畫家雅克-路易·大衛也為此奉命畫了一幅畫作《拿破崙一世及皇后加冕典禮》',
+                              'error'
+                            )
+                          }
+                        })
+                      })
+                    }
+                    else if (result.dismiss === 'cancel') {
+                      swal.fire(
+                        '答錯囉，偶爾也看看國際新聞吧!',
+                        '二戰後美國中情局對斐代爾·卡斯楚的一系列暗殺未遂事件，共計638起。卡斯楚因而成為：「世界上被暗殺次數最多的人物」，該項記錄在2011年載入金氏世界紀錄。',
+                        'error'
+                      )
+                    }
+                  })
+                });
+              } else if (result.dismiss === "cancel") {
+                swal.fire(
+                  '答錯囉',
+                  '台北市的市樹為榕樹，而樟樹則是苗栗縣的縣樹哦',
+                  'error');
+              }
+            })
+          })
+        } else if (result.dismiss === "cancel") {
+          swal.fire(
+            '答錯囉!', 
+            '元宵是將餡料切成約骰子大小的方塊，沾水後置於有乾糯米粉的竹篩上，以逆時鐘或順時針的方向滾動數次；當內餡沾黏薄薄一層的糯米粉後，將其放入一旁預備的開水約2秒，撈起瀝乾後再放於竹篩滾動，重複動作約8～12次，直到滾成適中的大小。',
+            'warning');
+        }
+      })
+    }
+  </script>
+
+  <script src="sweetalert2.all.min.js"></script>
+</body>
+
 </html>
